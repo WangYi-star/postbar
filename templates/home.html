@@ -1,0 +1,326 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/csshome.css">
+    <script type="text/javascript" src="/static/js/jshome.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<header>
+    <div id="logo"><!-- <img src="logoImage.png" alt="sample 		logo"> --><!-- Company Logo text -->
+		<img src="/static/images/logo.png" style="weight: 30px; height: 30px">
+		<span>BLOG</span>
+		<a href="/home">首页</a>
+	</div>
+	  
+    <div id="pimage">
+        <a href="#" onclick="homeblack()"><img src="/static/images/post2.png" style="width: 35px;height: 35px;"></a>
+    </div>
+	  {%  if uid %}
+	 <div id="per">
+        <a href="/usermanage" ><img src="/static/images/person.png" style="width: 40px;height: 40px;"></a>
+     </div>
+      {% endif %}
+    <nav>
+		{% if uid %}
+			<a href="/usermanage" title="Link">
+				{{uid}}
+			</a>
+		{% else %}
+			<a href="/login" title="Link">登入</a>
+		{% endif %}
+		<a href="/logout" title="Link">登出</a>
+		<a href="#" title="Link">消息</a>
+
+	</nav>
+</header>
+<div class="dropdown" style="display: inline">
+      <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+		跨站脚本XSS
+		<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;漏洞页面</label>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="/home_bug">存储型——直接点击（尝试清除缓存）</a>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="#">反射型——登录后提交留言，留言中写入脚本语句</a>
+            </li>
+
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;漏洞修复</label>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="/home">存储型——直接点击（尝试清除缓存）</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="#">反射型——登录后提交留言，留言中写入脚本语句，结果报错</a>
+            </li>
+	    </ul>
+</div>
+<div class="dropdown" style="display: inline">
+      <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+		跨站请求伪造CSRF
+		<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;漏洞页面</label>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="#">盗用用户身份向目标网站恶意发帖——启动攻击网站app1</a>
+            </li>
+
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;漏洞修复</label>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="#">目标网站设置csrftoken，发帖时，校验form表单中的token与cookie中的token——启动攻击网站app1</a>
+            </li>
+      </ul>
+</div>
+<div class="dropdown" style="display: inline">
+      <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+		HTTP Header注入
+		<span class="caret"></span>
+      </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;漏洞页面</label>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" onclick="homeblack_bug()">——登录状态下，直接点击，点击发帖，使用工具拦截post请求，修改header中的uid，添加“" or updatexml(1,concat(0x7e,database()),0)#”</a>
+            </li>
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;漏洞修复</label>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" onclick="homeblack()">检查header参数中的特殊字符——登录状态下，直接点击，点击发帖，使用工具拦截post请求，修改header中的uid，添加“" or updatexml(1,concat(0x7e,database()),0)#”</a>
+            </li>
+      </ul>
+</div>
+<div class="dropdown" style="display: inline">
+      <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+		目录遍历
+		<span class="caret"></span>
+      </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;服务器配置</label>
+            </li>
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;类似文件下载漏洞</label>
+            </li>
+      </ul>
+</div>
+<div class="dropdown" style="display: inline">
+      <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+		SQL注入
+		<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;漏洞页面</label>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="/login_bug">“#”注释跳过登录——直接点击，登录界面输入“62178451'#”</a>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="/hometo_bug/?postid=14">报错注入,爆出数据库名——直接点击，地址栏+" or updatexml (1,concat (0x7e,database()),0)"</a>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="/hometo_bug/?postid=14">布尔注入,显示删除的留言，跟数据库设计有关——直接点击，地址栏+" or 1=1"</a>
+            </li>
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;漏洞修复</label>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="/login">登录页面，绕过form表单提交的特殊字符——直接点击</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="/hometo/?postid=14">留言页面，绕过url提交的特殊字符——直接点击</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="#">从http header传入参数</a>
+            </li>
+	    </ul>
+</div>
+
+<div class="dropdown" style="display: inline">
+      <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+		文件下载
+		<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;漏洞页面</label>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="/display_bug">通过..跳过下载文件夹的限制——直接点击，修改地址栏“/download_bug?filename=123.png&filepath=../logs/luffy.log”</a>
+            </li>
+
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;漏洞修复</label>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="/display">绕过特殊字符——直接点击，修改地址栏“/download?filename=123.png&filepath=../logs/luffy.log”</a>
+            </li>
+	    </ul>
+</div>
+
+<div class="dropdown" style="display: inline">
+      <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+		文件上传
+		<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;漏洞页面</label>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="/usermanage">上传头像，能够上传各种格式的文件——进入个人中心</a>
+            </li>
+
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;漏洞修复</label>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="/login">上传头像，限制上传文件格式为图片——进入个人中心</a>
+            </li>
+
+	    </ul>
+</div>
+
+<div class="dropdown" style="display: inline">
+      <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+		日志
+		<span class="caret"></span>
+      </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="#">修改配置文件，自动生成日志</a>
+            </li>
+      </ul>
+</div>
+
+<div class="dropdown" style="display: inline">
+      <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+		其他安全漏洞
+		<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;身份验证</label>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="/register">注册密码强度——直接点击</a>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="/loginrsa">登录验证码——直接点击，登录62178454</a>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="/login_first_bug">双因子验证逻辑(漏洞)——登出后直接点击</a>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="/login_first">双因子验证逻辑(修复)——登出后直接点击</a>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="/login_verify_uid_bug">以本用户身份登录，但以其他用户身份发帖(漏洞)——登出直接点击</a>
+            </li>
+            <li role="presentation" >
+                <a role="menuitem" tabindex="-1" href="/login_verify_uid">添加校验码，验证用户是否是当前登录的用户(修复)——登出后直接点击</a>
+            </li>
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;敏感数据泄露</label>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="/loginrsa">密码传输加密——直接点击，登录62178454</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="/register">密码存储加密——直接点击</a>
+            </li>
+            <li role="presentation" >
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;越权访问</label>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="/login_verify_identity">水平越权，模拟普通用户删除留言，还是普通用户权限——登出后直接点击</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="#">/replymanage/delreply_bug/?del_id=xxx&belong_postid=xxx</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="#">/replymanage/delreply/?del_id=xxx&belong_postid=xxx</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="/login_verify_identity">垂直越权，提高权限为管理员权限后删除留言——登出后直接点击</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="#">/replymanage/delreply_identity_bug/?del_id=xxx&belong_postid=xxx</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="#">/replymanage/delreply_identity/?del_id=xxx&belong_postid=xxx</a>
+            </li>
+	    </ul>
+</div>
+
+  <div id="content">
+        <ul>
+			<li>
+				<div id="top">
+					<div id="t01">
+						评论数
+					</div>
+					<div id="t02">
+						发帖标题
+					</div>
+					<div id="t03">
+						发帖人
+					</div>
+					<div id="t04">
+						最新回复
+					</div>
+				</div>
+		  	</li>
+
+			{% for blog in blogs %}
+				<li>
+					<div id="top">
+						<div id="t1">
+							{{blog.0}}
+						</div>
+						<div id="t2">
+							<a href="/hometo?postid={{blog.6}}" >
+								{{blog.1}}
+							</a>
+						</div>
+						<div id="t3">
+							<div><a>{{blog.2}}</a></div>
+							<div><span>{{blog.3}}</span></div>
+						</div>
+						<div id="t4">
+							<div><span>{{blog.4}}</span></div>
+							<div><a>{{blog.5}}</a></div>
+						</div>
+					</div>
+				</li>
+			{% endfor %}
+
+        </ul>
+  </div>
+</body>
+</html>

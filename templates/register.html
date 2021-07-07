@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/static/css/csslogin.css">
+
+    <title>登录:微信公众号AlbertYang</title>
+    <script type="text/javascript" src="/static/js/jsconstraint.js"></script>
+</head>
+
+<body>
+    <section>
+        <!-- 背景颜色 -->
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="box">
+            <!-- 背景圆 -->
+{#            <div class="circle" style="--x:0"></div>#}
+{#            <div class="circle" style="--x:1"></div>#}
+{#            <div class="circle" style="--x:2"></div>#}
+{#            <div class="circle" style="--x:3"></div>#}
+{#            <div class="circle" style="--x:4"></div>#}
+            <!-- 登录框 -->
+            <div class="container" style="background-color: #3EB1DD">
+                <div class="form">
+                    <h2>注册</h2>
+                    <form method="post"  id="register_form" >
+                        {% csrf_token %}
+                        <div class="inputBox">
+                            <input type="text" name="uid" id="uid" placeholder="用户ID">
+
+                        </div>
+                        <div class="inputBox">
+                            <label>密码限制8-16位字符，同时包括数字、大小写字母和特殊字符四种组合</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="password" name="password" id="password" placeholder="密码">
+                        </div>
+                        <div class="inputBox">
+                            <input type="submit"  value="注册" onclick="verify();return false;">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

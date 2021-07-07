@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/static/css/csslogin.css">
+    <script src="/static/js/gVerify.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/jsencrypt.min.js"></script>
+    <title>登录:微信公众号AlbertYang</title>
+    <script>
+        {#        var verifyCode = new GVerify("v_container");#}
+        {#document.getElementById("my_button").onclick = function(){#}
+        {#    var res = verifyCode.validate(document.getElementById("code_input").value);#}
+        {#    if(res){#}
+        {#        alert("验证正确");#}
+        {#    }else{#}
+        {#        alert("验证码错误");#}
+        {#    }#}
+        function confirm_button() {
+            {#var verifyCode = new GVerify("v_container");#}
+            var res = verifyCode.validate(document.getElementById("code_input").value);
+            if(res){
+                var pwd =$('#pwd').val(); //明文密码
+                var pubkey = $('#pubkey').val(); //公钥，pkcs#1格式，字符串
+                var jsencrypt = new JSEncrypt(); //加密对象
+                jsencrypt.setPublicKey(pubkey); // 设置密钥
+                var en_pwd = jsencrypt.encrypt(pwd); //加密
+                $('#pwd').val(en_pwd); //返回给密码输入input
+                $('#form').submit();//post提交
+            }
+            else{
+                alert("验证码错误！")
+            }
+
+        }
+
+        function dologin() {
+            //公钥加密
+            var pwd =$('#pwd').val(); //明文密码
+            var pubkey = $('#pubkey').val(); //公钥，pkcs#1格式，字符串
+            var jsencrypt = new JSEncrypt(); //加密对象
+            jsencrypt.setPublicKey(pubkey); // 设置密钥
+            var en_pwd = jsencrypt.encrypt(pwd); //加密
+            $('#pwd').val(en_pwd); //返回给密码输入input
+            $('#form').submit();//post提交
+        }
+    </script>
+</head>
+
+<body>
+
+    <section>
+        <!-- 背景颜色 -->
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="box">
+            <!-- 登录框 -->
+            <div class="container" style="background-color: #3EB1DD">
+                <div class="form">
+                    <h2>登录</h2>
+                    <form method="post" id="form">
+                        {% csrf_token %}
+                        <div class="inputBox">
+                            <input type="text" name="uid" placeholder="用户ID">
+
+                        </div>
+                        <div class="inputBox">
+                            <input type="password" name="password" placeholder="密码" id="pwd">
+                            <input type="hidden" value="{{ pub_key }}" id="pubkey">
+                        </div>
+
+{#                        <div id="v_container" style="width: 120px;height: 40px; margin-top: 10px;margin-bottom: 10px;"></div>#}
+{#                        <input type="text" id="code_input" value="" placeholder="请输入验证码"/>#}
+{#                        <button id="my_button">验证</button>#}
+                        <div id="v_container" style="width: 120px;height: 40px; margin-top: 20px;margin-bottom: 20px;"></div>
+                        <div class="inputBox" style="display: inline">
+                            <input type="text" id="code_input" value="" placeholder="请输入验证码" style="width: 50%;">
+                        </div>
+
+                        <div class="inputBox">
+                            <input type="submit" value="登录" onclick="confirm_button();return false;">
+
+                        </div>
+                        <p class="forget">忘记密码?<a href="#">
+                                点击这里
+                            </a></p>
+                        <p class="forget">没有账户?<a href="/register">
+                                注册
+                            </a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{#    <div id="v_container" style="width: 160px;height: 60px;"></div>#}
+{#    <input type="text" id="code_input" value="" placeholder="请输入验证码"/>#}
+{#    <button id="my_button">验证</button>#}
+{##}
+    <script>
+        var verifyCode = new GVerify("v_container");
+    </script>
+
+</body>
+
+</html>

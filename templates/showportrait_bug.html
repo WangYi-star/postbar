@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>用户ID</th>
+        <th>用户昵称</th>
+        <th>头像下载(漏洞)</th>
+    </tr>
+    {% for user in raws %}
+    <tr>
+        <td>{{ user.0 }}</td>
+        <td>{{ user.1 }}</td>
+        {% if user.2 %}
+            <td><a href="/download_bug?filename={{ user.2 }}&filepath=headportrait/{{ user.2 }}">{{ user.2 }}</a></td>
+        {% else %}
+            <td>{{ user.2 }}</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

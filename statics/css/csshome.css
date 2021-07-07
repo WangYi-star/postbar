@@ -1,0 +1,210 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{
+    box-sizing: border-box;
+}
+
+a:link {color:black;}      /* 未访问链接*/
+a:visited {color:black;}  /* 已访问链接 */
+a:hover {color: pink;}  /* 鼠标移动到链接上 */
+a:active {color:greenyellow;}  /* 鼠标点击时 */
+a {
+	text-decoration-line: none;
+	cursor:pointer;
+	overflow: visible;
+}
+
+body{
+	background: rgb(255,248,231);
+}
+
+header {
+	/*Header */
+	background-color: rgb(255,237,195);
+	overflow: auto;
+	font-family: montserrat, sans-serif;
+	font-style: normal;
+	font-weight: 800;
+}
+header #logo {
+	/* Company Logo text */
+	width: 70%;
+	float: left;
+	padding-left: 2%;
+	padding-top: 20px;
+	padding-bottom: 12px;
+	color: rgba(146,146,146,1.00);
+}
+header #pimage{
+	width: 10%;
+	float: right;
+	margin-top: 15px;
+}
+
+header #per{
+	width: 2%;
+	float: left;
+	margin: 0;
+	margin-top: 15px;
+	padding: 0;
+}
+
+header nav {
+	/*Nav bar containing links in header */
+	text-align: right;
+	padding-top: 24px;
+	padding-bottom: 12px;
+	padding-right: 2%;
+	width: 14%;
+	float: left;
+	color: rgba(146,146,146,1.00);
+}
+header nav a {
+	/* Links in header */
+	padding-right: 2%;
+}
+
+
+
+#content div{
+	margin: 0;
+	padding: 0;
+}
+
+#content ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+#content ul li{
+	margin: 0;
+    padding: 0;
+    border-bottom: 1px solid silver;
+    width:100%;
+    height: 54px;
+}
+
+#content ul li #top{
+	padding: 0;
+	margin: 0;
+    width:100%;
+    height: 54px;
+}
+#content ul li #top #t01{
+	width: 6%;
+	float: left;
+	height: 54px;
+	margin: 0;
+	padding: 0;
+	padding-top:16px; 
+	text-align: center;
+	background-color: antiquewhite;
+	font-weight: 1000;
+}
+#content ul li #top #t02{
+	width: 64%;
+	float: left;
+	height: 54px;
+	padding-top: 16px;
+	text-align: center;
+	background-color:rgba(255,237,195,0.4);
+	font-weight: 1000;
+}
+#content ul li #top #t03{
+	width: 15%;
+	float: left;
+	height: 54px;
+	padding-top: 16px;
+	text-align: center;
+	background-color: antiquewhite;
+	font-weight: 1000;
+}
+#content ul li #top #t04{
+	width: 15%;
+	float: left;
+	height: 54px;
+	padding-top: 16px;
+	text-align: center;
+	background-color:rgba(255,237,195,0.4);
+	font-weight: 1000;
+}
+
+#content ul li #top #t1{
+	width: 6%;
+	float: left;
+	height: 54px;
+	padding-top: 12px;
+	text-align: center;
+	font-size: 22px;
+	font-weight: 1000;
+	color: rgb(235,203,172);
+}
+
+#content ul li:nth-child(odd) #top #t1{
+	background-color: rgb(255,246,223);
+}
+
+#content ul li:nth-child(even) #top #t1{
+	background-color: rgb(255,237,195);
+}
+
+#content ul li #top #t2{
+	width: 64%;
+	float: left;
+	height: 54px;
+	padding-top: 18px;
+	text-align: center;
+	font-size: 13px;
+}
+
+#content ul li:nth-child(odd) #top #t2{
+	background-color: rgb(255,248,231);
+}
+
+#content ul li:nth-child(even) #top #t2{
+	background-color: rgb(255,240,205);
+}
+
+#content ul li #top #t3{
+	width: 15%;
+	float: left;
+	height: 54px;
+	padding-top: 7px;
+	background-color: rgb(255,237,195);
+	font-size: 13px;
+}
+
+#content ul li:nth-child(odd) #top #t3{
+	background-color: rgb(255,246,223);
+}
+
+#content ul li:nth-child(even) #top #t3{
+	background-color: rgb(255,237,195);
+}
+
+#content ul li #top #t4{
+	width: 15%;
+	float: left;
+	height: 54px;
+	padding-top: 7px;
+
+	font-size: 13px;
+}
+
+#content ul li:nth-child(odd) #top #t4{
+	background-color: rgb(255,248,231);
+}
+
+#content ul li:nth-child(even) #top #t4{
+	background-color: rgb(255,240,205);
+}
+
+#content ul li #top #t3 div{
+	text-align: center;
+}
+#content ul li #top #t4 div{
+	text-align: center;
+}

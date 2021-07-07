@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/csshead.css">
+    <link rel="stylesheet" href="cardstyle.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        function gotouser() {
+            window.location.href="/usermanage";
+        }
+        function gotoreply() {
+            window.location.href="/postmanage"
+        }
+        function edit(){
+            var inp=document.getElementsByTagName("input");
+            var txta=document.getElementsByTagName("textarea");
+            txta[0].className="form-control";
+            txta[0].readOnly=false;
+            txta[0].placeholder="enter "+txta[0].name;
+            txta[1].className="form-control";
+            txta[1].readOnly=false;
+            txta[1].placeholder="enter "+txta[1].name;
+            for (var i=0;i<inp.length;i++){
+                change_edit(inp[i]);
+            }
+            document.getElementById("edit").style.display='none';
+            document.getElementById("save").style.display='block';
+            document.getElementById("save2").style.display='block';
+        }
+        function change_edit(x){
+            x.className="form-control";
+            x.readOnly=false;
+            x.placeholder="enter "+x.name;
+        }
+        function change_save(x){
+            x.className="";
+            x.readOnly=true;
+            x.placeholder="";
+        }
+        function save(){
+            var inp=document.getElementsByTagName("input");
+            var txta=document.getElementsByTagName("textarea");
+            /*保存信息*/
+            txta[0].className="";
+            txta[0].readOnly=true;
+            txta[0].placeholder='';
+            txta[1].className='';
+            txta[1].readOnly=true;
+            txta[1].placeholder='';
+            for (var i=0;i<inp.length;i++){
+                change_save(inp[i]);
+            }
+            document.getElementById("edit").style.display='block';
+            document.getElementById("save").style.display='none';
+            document.getElementById("save2").style.display='none';
+            {#document.getElementById("normalform").submit();#}
+            {#document.getElementById("supply").submit();#}
+            {#document.form.submit();#}
+            {#document.form2.submit();#}
+            document.normalform.submit();
+        }
+        function save2(){
+            var inp=document.getElementsByTagName("input");
+            var txta=document.getElementsByTagName("textarea");
+            /*保存信息*/
+            txta[0].className="";
+            txta[0].readOnly=true;
+            txta[0].placeholder='';
+            txta[1].className='';
+            txta[1].readOnly=true;
+            txta[1].placeholder='';
+            for (var i=0;i<inp.length;i++){
+                change_save(inp[i]);
+            }
+            document.getElementById("edit").style.display='block';
+            document.getElementById("save").style.display='none';
+            document.getElementById("save2").style.display='none';
+            {#document.getElementById("normalform").submit();#}
+            {#document.getElementById("supply").submit();#}
+            {#document.form.submit();#}
+            {#document.form2.submit();#}
+            document.supplyform.submit();
+        }
+        function upload(){
+            $("#file").trigger("click");
+        }
+        function GetFile() {
+            var a = event.target.files[0];
+            var url = window.URL.createObjectURL(a);
+            $("#portrait").css('content','url(' + url + ')');
+        }
+    </script>
+    <style>
+        * {
+        box-sizing: border-box;
+    }
+
+    body .bottom {
+        display: grid;
+        grid-template-rows: 1fr;
+        font-family: "Raleway", sans-serif;
+        {#background-color: #01e37f;#}
+    }
+
+    h3 {
+        font-size: 0.7em;
+        letter-spacing: 1.2px;
+        color: #a6a6a6;
+    }
+
+    .userdata {
+        display: grid;
+        grid-template-columns: 0.9fr 1fr;
+        margin: auto;
+        padding: 2.5em 0;
+        min-width: 600px;
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    .data-main {
+        position: relative;
+    }
+
+    .data-container {
+        position: absolute;
+        left: -6em;
+        display: grid;
+        grid-template-rows: 1fr;
+        width: 50%;
+        height: 50%;
+        border-radius: 6px;
+        box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
+    }
+
+    .data-sculpture {
+        border-radius: 6px 6px 0 0;
+        background-color: #9be010;
+        background: radial-gradient(#e5f89e, #96e001);
+        img {
+            position: absolute;
+            left: -3.5em;
+            top: 2em;
+            max-width: 110%;
+            filter: saturate(150%) contrast(120%) hue-rotate(10deg)
+                drop-shadow(1px 20px 10px rgba(0, 0, 0, 0.3));
+	    }
+        img {
+            position: absolute;
+            left: -3.5em;
+            top: 2em;
+            max-width: 10%;
+            width: 50px;
+            height: 50px;
+            filter: saturate(150%) contrast(120%) hue-rotate(10deg)
+                drop-shadow(1px 20px 10px rgba(0, 0, 0, 0.3));
+	    }
+    }
+    .data-album {
+        padding: 0.7em 1em;
+        border-radius: 0 0 6px 6px;
+        background-color: #fff;
+    }
+
+
+    .more__info {
+        padding: 0.8em 0;
+    }
+
+    .title {
+        h1 {
+            margin-bottom: 0.1em;
+            color: #4c4c4c;
+            font-size: 1.5em;
+            font-weight: 900;
+        }
+    }
+
+
+    button{
+        padding: 1.5em 3.1em;
+        border: none;
+        border-radius: 7px;
+        font-size: 0.8em;
+        font-weight: 700;
+        letter-spacing: 1.3px;
+        color:#fff;
+        background-color: #ff3f40;
+        box-shadow: 2px 2px 25px -7px #4c4c4c;
+        cursor: pointer;
+    }
+
+
+    button:active{
+        transform: scale(0.97);
+    }
+    input{
+        border: 0;
+    }
+
+
+    input:focus{
+        outline: none;
+    }
+
+
+    textarea{
+        border: 0;
+        resize: none;
+    }
+
+
+    textarea:focus{
+        outline: none;
+    }
+
+
+    select{
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        border:0;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="logo"><!-- <img src="logoImage.png" alt="sample 		logo"> --><!-- Company Logo text -->
+            <img src="/static/images/logo.png" style="weight: 30px; height: 30px">
+            <span>BLOG</span>
+            <a href="/home">首页</a>
+        </div>
+          {%  if uid %}
+         <div id="per">
+            <a href="/usermanage" onclick="homeblack()"><img src="/static/images/person.png" style="width: 40px;height: 40px;"></a>
+         </div>
+          {% endif %}
+        <nav>
+            {% if uid %}
+                <a href="/usermanage" title="Link">{{uid}}</a>
+            {% else %}
+                <a href="/login" title="Link">登入</a>
+            {% endif %}
+            <a href="/logout" title="Link">登出</a>
+            <a href="#" title="Link">消息</a>
+        </nav>
+    </header>
+    <div class="top">
+        <button onclick="gotouser()">用户管理</button>
+        <button onclick="gotoreply()">留言管理</button>
+    </div>
+    <div class="bottom">
+{#        <div class="container-fluid">#}
+{#            <div class="data-sculpture">#}
+{#            <img src="{{ filename }}" style="width: 100px;height: 100px;">#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <form enctype="multipart/form-data" action="/upload/?uid={{ uid }}" method="POST">#}
+{#                    {% csrf_token %}#}
+{#                    <input type="file" name="myfile"/>#}
+{#                    <br/>#}
+{#                    <input type="submit" value="upload"/>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+        <section class="userdata">
+            <div class="data-main">
+{#                <div class="data-sculpture">#}
+{#                       <input type="file" id="file" onchange="GetFile()" style="display: none;">#}
+{#                        <img id="portrait" src="/static/images/head.png" style="cursor: pointer;" onclick="upload()">#}
+{##}
+{#                        <img src="{{ filename }}" style="width: 100px;height: 100px;">#}
+{#                </div>#}
+{#                <div class="container-fluid">#}
+{#                            <div class="row">#}
+{#                                <form enctype="multipart/form-data" action="/upload/?uid={{ uid }}" method="POST">#}
+{#                                    {% csrf_token %}#}
+{#                                    <input type="file" name="myfile"/>#}
+{#                                    <br/>#}
+{#                                    <input type="submit" value="upload"/>#}
+{#                                </form>#}
+{#                            </div>#}
+{#                </div>#}
+
+                <div class="data-container">
+
+                    <div class="data-album">
+
+                        <form id="normal" name="normalform" method="post">
+                            {% csrf_token %}
+                            <label class="text-muted" for="userid">用户名&nbsp;&nbsp;&nbsp;</label><label>{{ uid }}</label><br>
+                            <label class="text-muted" for="username">昵称&nbsp;&nbsp;&nbsp;</label><input type="text" name="username" value="{{ detail.0 }}" readonly><br>
+                             <label class="text-muted" for="usergender">性别&nbsp;&nbsp;&nbsp;</label>
+                            <input name="gender" list="gender" value="{{ detail.1 }}" readonly="readonly">
+                                <datalist id="gender">
+                                    <option>男</option>
+                                    <option>女</option>
+                                </datalist>
+                            </input><br>
+                            <label for="userbday" class="text-muted">生日&nbsp;&nbsp;&nbsp;</label><input type="date" name="birthday" value="{{ detail.2 }}" readonly><br>
+                            <label for="usersign" class="text-muted">个性签名&nbsp;&nbsp;&nbsp;</label><textarea name="sign" id="usersign" cols="30" rows="2" readonly>{{ detail.3 }}</textarea>
+                        </form>
+                        <button id="save" type="button" class="btn btn-primary btn-block" onclick="save()" style="margin-top:8px;display: none;">保存</button>
+                    </div>
+                </div>
+            </div>
+            <div class="more__info">
+                <div class="title">
+                    <h1>更多信息</h1>
+                </div>
+                <form id="supply" name="supplyform" method="post">
+                    {% csrf_token %}
+                    <label for="useroccupation" class="text-muted">职业&nbsp;&nbsp;&nbsp;</label><input type="text" name="occupation" value="{{ detail.4 }}" readonly><br>
+                    <label for="useremail" class="text-muted">邮箱&nbsp;&nbsp;&nbsp;</label><input type="email" name="edress" value="{{ detail.5 }}" readonly><br>
+{#                    <label for="userphone" class="text-muted">手机</label><input type="number" name="phone" minlength=11 maxlength=11 value="&nbsp;&nbsp;&nbsp;{{ detail.6 }}" readonly><br>#}
+                    <label for="userphone" class="text-muted">手机&nbsp;&nbsp;&nbsp;</label><input type="text" name="phone"  value="{{ detail.6 }}" readonly><br>
+                    <label for="userlocation" class="text-muted">所在地区&nbsp;&nbsp;&nbsp;</label><input type="text" name="location" value="{{ detail.7 }}" readonly><br>
+                    <label for="userintro" class="text-muted">个人说明&nbsp;&nbsp;&nbsp;</label><br><textarea name="introduction" id="userintro" cols="30" rows="2" readonly>{{ detail.8 }}</textarea>
+{#                    <label for="userintro" class="text-muted">个人说明&nbsp;&nbsp;&nbsp;</label><textarea name="introduction" id="userintro" cols="30" rows="1" value="{{ detail.8 }}" readonly></textarea>#}
+                </form>
+                <button id="edit" type="button" class="btn btn-success btn-block" onclick="edit()">编辑</button>
+                <button id="save2" type="button" class="btn btn-primary btn-block" onclick="save2()" style="display: none;">保存</button>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入js文件-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/jsencrypt.min.js"></script>
+    <!-- dologin() 函数-->
+    <script>
+    function dologin() {
+            //公钥加密
+            var pwd =$('#pwd').val(); //明文密码
+            var pubkey = $('#pubkey').val(); //公钥，pkcs#1格式，字符串
+            var jsencrypt = new JSEncrypt(); //加密对象
+            jsencrypt.setPublicKey(pubkey); // 设置密钥
+            var en_pwd = jsencrypt.encrypt(pwd); //加密
+            $('#pwd').val(en_pwd); //返回给密码输入input
+            $('#form').submit();//post提交
+        }
+    </script>
+</head>
+<body>
+
+ <!-- 提交form-->
+<form id="form" action="/loginrsa/" method="post">
+    {% csrf_token %}
+     <div class="username">
+       <input id="name" type="text" name="name" placeholder="请输入用户名" required>
+     </div>
+     <div class="password">
+        <input id="pwd" type="password" name="password" placeholder="请输入密码" required>
+        <input type="hidden" value="{{ pub_key }}" id="pubkey">
+     </div>
+     <div class="yes_login"><input type="submit" value="登录" onclick="dologin();return false;" ></div>
+</form>
+
+</body>
+</html>

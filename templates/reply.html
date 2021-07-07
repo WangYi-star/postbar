@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/csshead.css">
+    <link rel="stylesheet" href="cardstyle.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        function gotouser() {
+            window.location.href="/usermanage";
+        }
+        function gotoreply() {
+            window.location.href="/postmanage"
+        }
+        function gotomypost() {
+            window.location.href="/postmanage"
+        }
+        function gotomyreply() {
+            window.location.href="/replymanage"
+        }
+        function gotomyreply_bug() {
+            window.location.href="/replymanage_bug"
+        }
+        function delreply(replyid) {
+            window.location.href="/replymanage/delreply/?del_id="+replyid.value+"&belong_postid="+replyid.name;
+        }
+    </script>
+    <style>
+        * {
+        box-sizing: border-box;
+        }
+        body{
+            height: 100%;
+            display: grid;
+            grid-template-rows: 1fr;
+            font-family: "Raleway", sans-serif;
+        }
+
+
+        .comment{
+            margin:auto;
+            width:900px;
+        }
+
+
+        #card-body{
+            margin:auto;
+            margin-top: 10px;
+            width:80%;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            background-color: #fff;
+            padding:10px;
+        }
+
+
+    button{
+        padding: 1.5em 3.1em;
+        border: none;
+        border-radius: 7px;
+        font-size: 0.8em;
+        font-weight: 700;
+        letter-spacing: 1.3px;
+        color:#fff;
+        background-color: #ff3f40;
+        box-shadow: 2px 2px 25px -7px #4c4c4c;
+        cursor: pointer;
+    }
+
+
+    button:active{
+        transform: scale(0.97);
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="logo"><!-- <img src="logoImage.png" alt="sample 		logo"> --><!-- Company Logo text -->
+            <img src="/static/images/logo.png" style="weight: 30px; height: 30px">
+            <span>BLOG</span>
+            <a href="/home">首页</a>
+        </div>
+          {%  if uid %}
+         <div id="per">
+            <a href="/usermanage" onclick="homeblack()"><img src="/static/images/person.png" style="width: 40px;height: 40px;"></a>
+         </div>
+          {% endif %}
+        <nav>
+            {% if uid %}
+                <a href="/usermanage" title="Link">{{uid}}</a>
+            {% else %}
+                <a href="/login" title="Link">登入</a>
+            {% endif %}
+            <a href="/logout" title="Link">登出</a>
+            <a href="#" title="Link">消息</a>
+        </nav>
+    </header>
+    <div class="top">
+        <button onclick="gotouser()">用户管理</button>
+        <button onclick="gotoreply()">留言管理</button>
+    </div>
+
+    <div class="comment">
+        <div id="card-body">
+            <button style="width: 80px;height: 30px;background-color: #66C1E4;margin: 0;padding: 0; margin-right: 10px;" onclick="gotomypost()">帖子</button>
+            <button style="width: 80px;height: 30px;background-color: #66C1E4;margin: 0;padding: 0; margin-right: 10px;" onclick="gotomyreply()">留言(修复)</button>
+            <button style="width: 80px;height: 30px;background-color: #66C1E4;margin: 0;padding: 0; margin-right: 10px;" onclick="gotomyreply_bug()">留言(漏洞)</button>
+        </div>
+        {% for element in replyall %}
+            <div id="card-body">
+                <h4 id="card-title">{{ element.0 }}</h4>
+                <p id="card-text">{{ element.1 }}</p>
+                <span>{{ element.2 }}</span><br>
+                <a href="/hometo/?postid={{ element.4 }}"  class="card-link">查看详情</a>
+                <button value="{{ element.3 }}" name="{{ element.4 }}" onclick="delreply(this)" style="width: 60px; height: 20px; background-color: #66C1E4;margin: 0;padding: 0; margin-left: 10px;"> 删除</button>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
